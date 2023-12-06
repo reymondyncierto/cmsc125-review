@@ -9,5 +9,5 @@ clean:
 
 thread-creation: thread-creation.c
 	gcc -I $(INCLUDES) -o thread-creation thread-creation.c $(FLAGS)
- shared-data: shared-data.c
-	gcc -I $(INCLUDES) -o shared-data. shared-data.c $(FLAGS)
+shared-data: shared-data.c
+	gcc -I $(INCLUDES) -o shared-data shared-data.c $(FLAGS)

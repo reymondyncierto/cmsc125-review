@@ -5,7 +5,7 @@
 #include "common.h"
 #include "common_threads.h"
 
-void *mythread(void *arg) {
+void *mythread(void *arg) { // thread routine, this is what the thread will do
     printf("%s\n", (char *) arg);
     return NULL;
 }
@@ -16,11 +16,11 @@ int main(int argc, char *argv[]) {
 	exit(1);
     }
 
-    pthread_t p1, p2;
+    pthread_t p1, p2; // thread variable, in total there are three threads, the main thread and the two threads created here
     printf("main: begin\n");
-    Pthread_create(&p1, NULL, mythread, "A"); 
+    Pthread_create(&p1, NULL, mythread, "A"); // create a thread, the thread will run the function mythread, the argument of the function is "A"
     Pthread_create(&p2, NULL, mythread, "B");
-    // join waits for the threads to finish
+    // join - main thread waits for the threads to finish
     Pthread_join(p1, NULL); 
     Pthread_join(p2, NULL); 
     printf("main: end\n");

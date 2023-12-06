@@ -6,14 +6,14 @@
 #include "common_threads.h"
 
 int max;
-volatile int counter = 0; // shared global variable
+volatile int counter = 0; // shared global variable, accessible by all threads
 
 void *mythread(void *arg) {
     char *letter = arg;
-    int i; // stack (private per thread) 
+    int i; // stack (private per thread)  
     printf("%s: begin [addr of i: %p]\n", letter, &i);
     for (i = 0; i < max; i++) {
-	counter = counter + 1; // shared: only one
+	counter = counter + 1; // shared: only one, critical section
     }
     printf("%s: done\n", letter);
     return NULL;
@@ -45,9 +45,9 @@ int main(int argc, char *argv[]) {
 // ./concurrency <count>
 
 // what is the output
-// main: begin [counter = 0] [b7f8c000]
-// A: begin, address = b7f8c000
-// B: begin, address = b7f8c000
+// main: begin [counter = 0] [7921f030]
+// A: begin, address = 0x7f4de2ffee3c, address of i in the thread stack of b
+// B: begin, address = 0x7f4de27fde3c
 // A: done
 // B: done
 // main: done
